@@ -1,0 +1,41 @@
+/*Criando objetos para ser reutilizado*/
+@mixin botaoPrimario{
+    background-color: $corPrimaria0;
+    color: $branco;
+}
+
+@mixin botaoInvertido{
+    background-color: $branco;
+    color: $corPrimaria0;
+    border: 1px solid $corPrimaria0;
+}
+
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  /*&. para pegar a classes*/
+    &.primaria{
+         @include botaoPrimario;
+               /*hover quando passa o mouse ele aplica o estilo*/
+        &:hover{
+           @include botaoInvertido;
+        }
+    }
+
+    &.invertido{
+        @include botaoInvertido;
+  
+        &:hover{
+            @include botaoPrimario;
+        }
+    }
+
+
+    /*&: para pegar a propriedade*/
+    &:disabled{
+        opacity: 0.5;
+    }
+}

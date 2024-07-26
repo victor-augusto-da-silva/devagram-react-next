@@ -8,6 +8,12 @@
   font-size: 14px;
 };
 
+.avatar{
+  border-radius: 50%;
+  /*tenta encaixar a imagem do tam do elemento*/
+  object-fit: cover;
+}
 
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
+@import '../../components/botao/botao.scss';
