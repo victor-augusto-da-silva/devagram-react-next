@@ -13,6 +13,9 @@
   /*tenta encaixar a imagem do tam do elemento*/
   object-fit: cover;
 }
+.oculto{
+  display: none;
+}
 
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
