@@ -7,6 +7,11 @@
   font-family: $fontRegular;
   font-size: 14px;
 };
+/*next é a raiz dos elementos*/
+html,body,#__next{
+  height: 100%;
+  margin: 0;
+}
 
 .avatar{
   border-radius: 50%;
@@ -20,3 +25,4 @@
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
 @import '../../components/botao/botao.scss';
+@import '../styles/paginaPublica.scss';

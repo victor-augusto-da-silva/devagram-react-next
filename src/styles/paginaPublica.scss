@@ -1,0 +1,12 @@
+.paginaPublica{
+    display: flex;
+   
+    /*Coloca o posicionamento dos elementos na vertical*/
+    flex-direction: column;
+     /*Somente no logo container*/
+    .logoContainer{
+        position: relative;
+        height: 50px;
+        width: 50px;
+    }
+}
