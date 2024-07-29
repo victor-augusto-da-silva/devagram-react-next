@@ -22,7 +22,24 @@ html,body,#__next{
   display: none;
 }
 
+input{
+  &::placeholder{
+    /*Chrome, opera, safari e firefox*/
+    color:$cinza2;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder{
+    /*Explorer 10-11*/
+    color: $cinza2;
+  }
+  &::-ms-input-placeholder{
+    /*Edge*/
+    color: $cinza2
+  }
+}
+
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
 @import '../../components/botao/botao.scss';
 @import '../styles/paginaPublica.scss';
+@import '../../components/inputPublico/inputPublico.scss';

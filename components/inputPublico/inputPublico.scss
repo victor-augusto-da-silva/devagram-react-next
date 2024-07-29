@@ -1,0 +1,16 @@
+.inputPublicoContainer{
+    .inputPublico{
+        display: flex;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $corPrimaria0;
+        margin-bottom: 20px;
+    }
+        input{
+            border: none;
+            color: $corPrimaria0;
+            /*Ocupa o maior espaço disponivel*/
+            flex: 1;
+            margin-left: 12px;
+        }
+    
+}

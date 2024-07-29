@@ -21,6 +21,7 @@ export default function Login() {
                     src={imagemLogo}
                     alt='logotipo'
                     layout="fill"
+                    className="logo"
                 />
             </div>
             <div className="conteudoPaginaPublica">
