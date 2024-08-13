@@ -1,0 +1,26 @@
+ .paginaCadastro{
+    .uploadImagemContainer{
+        text-align: center;
+         position: relative;
+         margin-bottom: 48px;
+
+
+         .avatarPreview{
+            height: 120px;
+            width: 120px;
+         }
+         //aplica estilo antes ou depois do conteudo da div
+         &::after{
+            content: url('/image/camera.svg');
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            right: 0;
+            margin: auto;
+            left: 90px;
+            bottom: 0px;
+         }
+    }
+    
+ 
+ }

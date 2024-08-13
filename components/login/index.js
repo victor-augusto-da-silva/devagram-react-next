@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Botao from '../botao'
 import Link from "next/link";
 import { useState } from "react";
-
+import {validarEmail, validarSenha} from '../../utils/validadores'
 
 export default function Login() {
 /*Email começa vazio*/ 
@@ -33,6 +33,8 @@ export default function Login() {
                         /*Ref do obj do input*/
                         aoAlterarValor={(e) => setEmail(e.target.value)}
                         valor={email}
+                        mensagemValidacao="O endereço informado é invalido"
+                        exibirMensagemValidacao={email && !validarEmail(email)}
                     />
                     <InputPublico
                         imagem={imagemChave}
@@ -40,6 +42,8 @@ export default function Login() {
                         tipo="password"
                         aoAlterarValor={(e) => setSenha(e.target.value)}
                         valor={senha}
+                        mensagemValidacao="A senha deve conter pelo menos 3 caracteres"
+                        exibirMensagemValidacao={senha && !validarSenha(senha)}
                     />
 
                     <Botao

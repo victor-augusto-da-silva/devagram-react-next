@@ -1,66 +1,58 @@
 import { useEffect, useRef } from "react";
 
 /*aceita qlqr tipo de imagem*/ 
-export function UploadImagem({
-    className ='',
-    setImagem ,
+export default function UploadImagem({
+    className = '',
+    setImagem,
     imagemPreview,
-    imagemPreviewClassName= '',
+    imagemPreviewClassName = '',
     aoSetarAReferencia
-}){
+}) {
     const referenciaInput = useRef(null);
 
-    useEffect(() =>{
-            if(!aoSetarAReferencia){
-                return;
-            }
-
-            aoSetarAReferencia(referenciaInput?.current);
-    },
-    // sempre que alterar a referencia do input
-    [referenciaInput?.current?.click()]);
-    
-    const abrirSeletorArquivos = () =>{
-       referenciaInput?.current?.click();
-    }
-
-
-    const aoAlterarImagem = () =>{
-      
-        if(!referenciaInput?.current?.files?.length){
+    useEffect(() => {
+        if (!aoSetarAReferencia) {
             return;
         }
-        const arquivo = referenciaInput?.current?.files[0];
-       /*le o arquivo e devolve a url*/ 
+
+        aoSetarAReferencia(referenciaInput.current);
+    }, [aoSetarAReferencia]);
+
+    const abrirSeletorArquivos = () => {
+        referenciaInput.current.click();
+    }
+
+    const aoAlterarImagem = () => {
+        if (!referenciaInput.current.files.length) {
+            return;
+        }
+        const arquivo = referenciaInput.current.files[0];
+        /*le o arquivo e devolve a url*/ 
         const fileReader = new FileReader();
         fileReader.readAsDataURL(arquivo);
-        fileReader.onloadend = () =>{
+        fileReader.onloadend = () => {
             /*ao final da leitura*/ 
-           setImagem({
-            preview: fileReader.result,
-            arquivo
-           })
+            setImagem({
+                preview: fileReader.result,
+                arquivo
+            });
         }
     }
 
-    return(
-        <div className={`uploadImagemContainer ${className}`}  onClick={abrirSeletorArquivos} >
-
-        {imagemPreview && (
-            <div className="imagemPreviewContainer">
-            <img src={imagemPreview} alt="imagem preview" className={imagemPreviewClassName} /> 
-            </div>
-        )}
-      
-      
-      
-        <input type="file" 
-        className="oculto" 
-        accept="image/*"
-        ref={referenciaInput}
-        /*qnd houver troca do elemento*/ 
-        onChange={aoAlterarImagem}
-        />
+    return (
+        <div className={`uploadImagemContainer ${className}`} onClick={abrirSeletorArquivos}>
+            {imagemPreview && (
+                <div className="imagemPreviewContainer">
+                    <img src={imagemPreview} alt="imagem preview" className={imagemPreviewClassName} /> 
+                </div>
+            )}
+            <input 
+                type="file" 
+                className="oculto" 
+                accept="image/*"
+                ref={referenciaInput}
+                onChange={aoAlterarImagem}
+            />
         </div>
     );
 }
