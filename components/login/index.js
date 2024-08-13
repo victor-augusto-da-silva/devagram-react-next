@@ -28,16 +28,16 @@ export default function Login() {
             return
         }
         setEstaSubmetendo(true);
-       // try{
-         //   await usuarioService.login(){
-             //   login: email ,
-           //     senha: senha
-          //  }
+        try{
+           await usuarioService.login({
+            login: email ,
+              senha
+            })
             //TODO: redirecionar o usuario para home
-      //  }
-      //  catch(error){
-      //      alert("Erro ao realizar login. " + error?.response?.data?.erro  );
-       // }
+      }
+        catch(error){
+            alert("Erro ao realizar login. " + error?.response?.data?.erro  );
+        }
         setEstaSubmetendo(false);
     }
     return (
@@ -51,7 +51,7 @@ export default function Login() {
                 />
             </div>
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <InputPublico
                         imagem={imagemEnvelope}
                         texto="E-mail"
