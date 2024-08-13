@@ -7,13 +7,39 @@ import Botao from '../botao'
 import Link from "next/link";
 import { useState } from "react";
 import {validarEmail, validarSenha} from '../../utils/validadores'
+import UsuarioService from "../../services/UsuarioService";
+
+
+const usuarioService = new UsuarioService;
 
 export default function Login() {
 /*Email começa vazio*/ 
     const [email,setEmail] = useState("");
     const [senha,setSenha] = useState("");
-
-
+    const [estaSubmetendo,setEstaSubmetendo] = useState(false);
+    const validarFormulario = () => {
+        return(
+            validarEmail(email) && validarSenha(senha)
+        )
+    }
+    const aoSubmeter  = async(e) =>{
+        e.preventDefault();
+        if(!validarFormulario()){
+            return
+        }
+        setEstaSubmetendo(true);
+       // try{
+         //   await usuarioService.login(){
+             //   login: email ,
+           //     senha: senha
+          //  }
+            //TODO: redirecionar o usuario para home
+      //  }
+      //  catch(error){
+      //      alert("Erro ao realizar login. " + error?.response?.data?.erro  );
+       // }
+        setEstaSubmetendo(false);
+    }
     return (
         <section className="paginaLogin paginaPublica">
           <div className="logoContainer">
@@ -49,7 +75,7 @@ export default function Login() {
                     <Botao
                         texto={"Login"}
                         tipo="submit"
-                        desabilitado={false}
+                        desabilitado={!validarFormulario() || estaSubmetendo}
                     /> 
                 </form>
                 <div className="rodapePaginaPublica">
