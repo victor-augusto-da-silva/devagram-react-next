@@ -1,44 +1,35 @@
+// index.js ou outro arquivo principal
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Botao from "../../components/botao";
 import Avatar from "../../components/avatar";
 import { UploadImagem } from "../../components/uploadImagem";
-import { useState,useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Login from "../../components/login";
-export default function Home() {
-/*armazena o componente da imagem*/ 
-const[imagem,setImagem] = useState(null);
-const referenciaInput =    useRef(null);
-console.log(imagem);
+import UsuarioService from "../../services/UsuarioService";
+import HomePage from "../../components/home"; // Importando o componente Home
 
+const usuarioService = new UsuarioService();
 
-return (<> 
+export default function Main() {
+  /* armazena o componente da imagem */
+  const [imagem, setImagem] = useState(null);
+  const referenciaInput = useRef(null);
+  console.log(imagem);
+  const [estaAutenticado, setEstaAutenticado] = useState(false);
 
-<Login />
+  /* [] é chamado apenas a primeira vez */
+  useEffect(() => {
+    setEstaAutenticado(usuarioService.estaAutenticado());
+  }, []);
 
-</>);
+  if (estaAutenticado) {
+    return <HomePage />; // Usando o componente Home importado
+  }
 
-/*
   return (
-    <div>
-
-    <h1>Ola mundo </h1>
-    <button onClick={()=> referenciaInput?.current?.click() }>Abrir seletor de arquivos</button>
-    <UploadImagem 
-     setImagem={setImagem} 
-     imagemPreview = {imagem?.preview}
-     aoSetarAReferencia = {(ref) => referenciaInput.current = ref}
-     /> 
-
-
-
-    <Avatar/>
-    <Botao texto={`Login`}  cor='primaria'   manipularClique= {() => console.log('Botão clicado')}  />
-    </div>
-  );*/ 
-
-
-
-
-} 
- 
+    <>
+      <Login />
+    </>
+  );
+}
