@@ -12,7 +12,7 @@ import UsuarioService from "../../services/UsuarioService";
 
 const usuarioService = new UsuarioService;
 
-export default function Login() {
+export default function Login({aposAutenticacao}) {
 /*Email começa vazio*/ 
     const [email,setEmail] = useState("");
     const [senha,setSenha] = useState("");
@@ -32,8 +32,12 @@ export default function Login() {
            await usuarioService.login({
             login: email ,
               senha
-            })
-            //TODO: redirecionar o usuario para home
+            });
+
+             //  redireciona o usuario para home
+             if(aposAutenticacao){
+                aposAutenticacao();
+             }
       }
         catch(error){
             alert("Erro ao realizar login. " + error?.response?.data?.erro  );

@@ -9,9 +9,10 @@ import imagemChave from "../../../public/image/chave.svg";
 import imagemAvatar from "../../../public/image/avatar.svg";
 import InputPublico from '../../../components/inputPublico';
 import UploadImagem from '../../../components/uploadImagem'; // Certifique-se de que está importando corretamente
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import {validarEmail, validarSenha,validarNome,validarConfirmacaoSenha} from '../../../utils/validadores';
 import UsuarioService from '../../../services/UsuarioService';
+import { useRouter } from 'next/router';
 
 
 const usuarioService = new UsuarioService();
@@ -23,9 +24,8 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
-
     const [estaSubmetendo,setEstaSubmentendo] = useState(false);
-
+    const router = useRouter();
     const validarFormulario = () =>{
         return(
             validarNome (nome) && validarEmail(email)&& 
@@ -49,9 +49,13 @@ export default function Cadastro() {
                 corpoReqCadastro.append("file",imagem.arquivo);
              }
              await usuarioService.cadastro(corpoReqCadastro);
-            //TODO:  autenticar o usuario diretamente apos o cadastro
-
-             alert("Sucesso!");
+             await usuarioService.login({
+                login: email,
+                senha
+             });
+             // Redireciona para a raiz
+             // coloca em pilha para que seja possivel voltar a navegação (push)
+             router.push('/');
             }
         catch(error){
             alert("Erro ao cadastrar Usuario. " + error?.response?.data?.erro  )
