@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import UsuarioService from "../services/UsuarioService"
+import Cabecalho from "../components/layout/Cabecalho";
 
 const usuarioService = new UsuarioService();
 
@@ -13,7 +14,14 @@ export default function comAutorizacao(Componente){
                 router.replace('/');
                 return null;
             }
-            return <Componente {...props} />
+            return (
+                <div> 
+                <Cabecalho />
+                <Componente {...props} />
+                </div>    
+            );
+
+     
         }
         return null;
     }
