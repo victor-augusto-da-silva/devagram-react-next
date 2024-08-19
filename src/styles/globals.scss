@@ -69,7 +69,20 @@ input{
   margin-top: -15px;
 }
 
-
+.barraNavegacao{
+  ul{
+    display: flex;
+    //mesmo espaço entre os elementos
+    justify-content: space-around	;
+    padding: 0;
+    margin: 10px 0px;
+    li{
+      // tira o . da lista
+      list-style: none;
+      cursor: pointer;
+    }
+  }
+}
 
 
 /*Local de onde estão as fontes*/
@@ -77,4 +90,6 @@ input{
 @import '../../components/botao/botao.scss';
 @import '../styles/paginaPublica.scss';
 @import '../../components/inputPublico/inputPublico.scss';
-@import '../pages/cadastro/cadastro.scss'
+@import '../pages/cadastro/cadastro.scss';
+@import '../../components/layout/cabecalho.scss'
+ 
