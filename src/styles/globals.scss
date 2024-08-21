@@ -84,6 +84,10 @@ input{
   }
 }
 
+ strong{
+  font-family: $fontBold;
+ }
+
 
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
@@ -91,5 +95,6 @@ input{
 @import '../styles/paginaPublica.scss';
 @import '../../components/inputPublico/inputPublico.scss';
 @import '../pages/cadastro/cadastro.scss';
-@import '../../components/layout/cabecalho.scss'
+@import '../../components/layout/cabecalho.scss';
+@import '../../components/layout/rodape.scss'
  

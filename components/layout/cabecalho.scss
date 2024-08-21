@@ -37,6 +37,35 @@
         }
     }
 
+    .resultadoPesquisaContainer{
+        position: absolute;
+        background-color: $branco;
+        width: 100%;
+        /*Para ficar por cima de todos os elementos*/
+        z-index: 9;
+        .resultadoPesquisa{
+            display: flex;
+            padding: 10px 16px;
+            &:hover{
+                background-color: $cinza0;
+            }
+
+            .avatar{
+                height: 32px;
+                width: 32px;
+                margin-right: 8px;
+            }
+            .informacoesUsuario{
+                /*primeiro nivel, qlqr elemento abaixo das informações do usuario*/
+                    > * {
+                        display: block;
+                        font-size: 12px;
+                        color: $cinza4;
+                    }
+            }
+        }
+    }
+
     @media screen  and ( min-width: $desktopBreakpoint){ 
 
         background-color: $branco;
@@ -46,9 +75,15 @@
             margin: auto;
             align-items: center;
             justify-content: center;
+
+            .logoCabecalhoPrincipal{
+                width: 200px;
+             
+            }
+
             .barraPesquisa{
-                flex: 0.6;
-                margin: 0px 5px 0px 40px;
+                flex: 0.5;
+                margin: 0px 5px 0px 30px;
                 input{
                     width: 100%;
                 }
@@ -64,5 +99,13 @@
         }
 
     
+        .resultadoPesquisaContainer{
+            width: 20%;
+            margin: auto;
+            right: 0;
+            left: 90px;
+            cursor: pointer;
+            box-shadow: 0px 4px 5px $cinza1;
+        }
     }
 }
