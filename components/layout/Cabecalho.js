@@ -40,13 +40,13 @@ export default function Cabecalho(){
             avatar: '',
             nome: 'teste2',
             email: 'teste',  
-            _id: '1234'
+            _id: '567'
           },
           {
             avatar: '',
             nome: 'teste3',
             email: 'teste',  
-            _id: '1234'
+            _id: '8910'
           }
 ])
     }
