@@ -27,7 +27,7 @@ return localStorage.getItem('token') !==null;
 
 async pesquisar(termoDaPesquisa){
     
-    return this.get('/pesquisa?filter=' + termoDaPesquisa)
+    return this.get('/pesquisa?filtro=' + termoDaPesquisa);
 }
 
 }

@@ -1,4 +1,5 @@
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import UsuarioService from "../services/UsuarioService";
 import Cabecalho from "../components/layout/Cabecalho";
 import Rodape from "../components/layout/Rodape";
@@ -8,21 +9,32 @@ const usuarioService = new UsuarioService();
 export default function comAutorizacao(Componente) {
     return function AutorizacaoWrapper(props) {
         const router = useRouter();
+        const [isAuthenticated, setIsAuthenticated] = useState(false);
+        const [isClient, setIsClient] = useState(false);
 
-        if (typeof window !== 'undefined') {
-            if (!usuarioService.estaAutenticado()) {
-                // substitui a url atual pela raiz
+        useEffect(() => {
+            setIsClient(true);
+            if (usuarioService.estaAutenticado()) {
+                setIsAuthenticated(true);
+            } else {
                 router.replace('/');
-                return null;
             }
-            return (
-                <div>
-                    <Cabecalho />
-                    <Componente {...props} />
-                    <Rodape />
-                </div>
-            );
+        }, []);
+
+        if (!isClient) {
+            return <div>Loading...</div>;
         }
-        return null;
+
+        if (!isAuthenticated) {
+            return null;
+        }
+
+        return (
+            <div>
+                <Cabecalho />
+                <Componente {...props} />
+                <Rodape />
+            </div>
+        );
     };
 }

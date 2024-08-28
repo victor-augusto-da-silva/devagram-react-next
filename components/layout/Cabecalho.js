@@ -5,15 +5,16 @@ import Navegacao from './Navegacao';
 import { useState } from 'react';
 import ResultadoPesquisa from './ResultadoPesquisa';
 import UsuarioService from '../../services/UsuarioService';
+import { useRouter } from 'next/router';
 
 
 const usuarioService = new UsuarioService();
 
 
 export default function Cabecalho(){
-    const[resultadoPesquisa,setResultadoPesquisa] = useState([]);
+    const[resultadoPesquisa,setResultadoPesquisa]  = useState([]);
     const [termoPesquisado,setTermoPesquisado] = useState('');
-    
+     const router = useRouter();   
     const aoPesquisar = async (e) => {
        setTermoPesquisado(e.target.value);
        setResultadoPesquisa([]);
@@ -25,34 +26,21 @@ export default function Cabecalho(){
 
     try {
         const {data} = await usuarioService.pesquisar(termoPesquisado);
-         console.log(data);
+         setResultadoPesquisa(data);
     } catch (error) {
         alert('Erro ao pesquisar usuario.' + error?.response?.data?.erro);
     }
-    setResultadoPesquisa([
-        {
-          avatar: '',
-          nome: 'Teste1',
-          email: 'teste@teste1.com',  
-          _id: '1234'
-        },
-        {
-            avatar: '',
-            nome: 'teste2',
-            email: 'teste',  
-            _id: '567'
-          },
-          {
-            avatar: '',
-            nome: 'teste3',
-            email: 'teste',  
-            _id: '8910'
-          }
-])
+ 
     }
 
     const aoClicarResultadoPesquisa = (id) =>{
-        console.log('aoClicarResultadoPesquisa',{id});    
+        //limpando o termo pesquisado para navegação
+        setResultadoPesquisa([]);
+        setTermoPesquisado('');
+
+
+      //A pasta esta criada [id] para que eu possa usar o hook do Id do usuario pesquisado
+        router.push(`/perfil/${id}`);
     }
     return (
         <header className='cabecalhoPrincipal'>
