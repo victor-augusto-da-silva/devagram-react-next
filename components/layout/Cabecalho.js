@@ -42,11 +42,17 @@ export default function Cabecalho(){
       //A pasta esta criada [id] para que eu possa usar o hook do Id do usuario pesquisado
         router.push(`/perfil/${id}`);
     }
+
+    const redirecionarParaHome = () => {
+        router.push('/');
+    }
+
     return (
         <header className='cabecalhoPrincipal'>
             <div className='conteudoCabecalhoPrincipal'> 
             <div className='logoCabecalhoPrincipal'>
                 <Image
+                onClick={redirecionarParaHome}
                 src={logoHorizontalImg}
                 alt='Logo Devagram'
                 layout='fill' // permite redimensionar imagem baseado na div pai
