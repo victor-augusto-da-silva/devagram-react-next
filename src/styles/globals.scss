@@ -88,6 +88,12 @@ input{
   font-family: $fontBold;
  }
 
+ body{
+  @media screen and (min-width: $desktopBreakpoint){
+    background-color: $cinza5;
+ 
+  }
+ }
 
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
