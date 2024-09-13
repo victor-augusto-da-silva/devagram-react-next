@@ -21,11 +21,13 @@ export default function Postagem({ usuario, fotoDoPost, descricao, comentarios }
             </div>
             <div className="rodapeDaPostagem">
                 <div className="acoesDaPostagem">
+                    
                     <Image
                         src={imgCurtir}
                         alt='Icone Curtir'
                         width={20}
                         height={20}
+                         className="icon"
                         onClick={() => {
                             console.log('Curtido')
                         }}
@@ -35,10 +37,12 @@ export default function Postagem({ usuario, fotoDoPost, descricao, comentarios }
                         alt='Icone comentar'
                         width={20}
                         height={20}
+                         className="icon"
                         onClick={() => {
                             console.log('comentar')
                         }}
                     />
+                  
                     <span className="quantidadeCurtidas">
                         Curtido por <strong>10 pessoas</strong>
                     </span>
@@ -49,8 +53,7 @@ export default function Postagem({ usuario, fotoDoPost, descricao, comentarios }
                         {descricao}
                     </p>
                 </div>
-            </div>
-            <div className="comentariosDaPublicacao">
+                <div className="comentariosDaPublicacao">
                 {comentarios.map((comentario, i) => (
                     <div className="comentario" key={i}>
                         <strong className="comentario-nome">{comentario.nome}</strong>
@@ -58,6 +61,8 @@ export default function Postagem({ usuario, fotoDoPost, descricao, comentarios }
                     </div>
                 ))}
             </div>
+            </div>
+      
         </div>
     );
 }

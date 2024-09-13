@@ -95,6 +95,13 @@ input{
   }
  }
 
+.largura30pctDesktop{
+  @media screen and (min-width: $desktopBreakpoint) {
+      width: 45%;
+      margin: auto;
+  }
+}
+
 /*Local de onde estão as fontes*/
 @import '../../public/fonts/fonts.scss';
 @import '../../components/botao/botao.scss';

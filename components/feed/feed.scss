@@ -8,6 +8,7 @@
             display: flex;
             align-items: center;
             padding: 0px 12px;
+            margin-bottom: 8px;
 
         .avatar{
             width: 40px;
@@ -19,8 +20,55 @@
             color: $cinza4;
         }
     }
+
+    .fotoDaPostagem{
+        img{
+            width: 100%;
+            height: auto;
+            max-height: 360px;
+            object-fit: cover;
+        }
+    }
+    .rodapeDaPostagem{
+        padding: 5px 16px;
+        strong.nomeUsuario{
+            font-size: 12px;
+            float: left;
+            margin-right: 5px;
+        }
+        p.descricao{
+            font-size: 12px;
+            margin: 0 0 2px;
+            color: $cinza4;
+        }
+        .comentario-nome{
+            font-size: 12px;
+            float: left;
+            margin-right: 5px;
+        }
+        .acoesDaPostagem{
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            .icon{
+                margin-right: 7px  
+            }   
+            .quantidadeCurtidas{
+                font-family: $fontLight;
+                font-size: 12px;
+                color: $cinza4;
+                strong{
+                    font-size: 12px;
+                    color: $cinza4;
+                }
+            }
+        }
+    }
     }
     a {
         text-decoration: none !important;
     }
+
+    
+ 
 }
