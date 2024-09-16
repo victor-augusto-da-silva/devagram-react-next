@@ -6,15 +6,22 @@ import imgCurtido from '../../public/image/curtido.svg';
 import imgComentarioAtivo from '../../public/image/comentarioAtivo.svg';
 import imgComentarioCinza from '../../public/image/comentarioCinza.svg';
 import { useState } from "react";
+import FazerComentario from "./FazerComentario";
 
 const tamanhoLimiteDescricao = 90;
 
 
 export default function Postagem({
-     usuario, fotoDoPost, descricao, comentarios
+     usuario, fotoDoPost, descricao, comentarios,usuarioLogado
      }) {
 
+
+    const [deveExibirSecaoParaComentar,setDeveExibirSecaoParaComentar] = useState(false);
+
     const [tamanhoAtualDaDescricao,setTamanhoAtualDaDescricao] = useState(tamanhoLimiteDescricao);
+
+
+
         const exibirDescricaoCompleta = () => {
             setTamanhoAtualDaDescricao(Number.MAX_SAFE_INTEGER);
         }
@@ -46,9 +53,12 @@ export default function Postagem({
             <div className="fotoDaPostagem">
                 <img src={fotoDoPost} alt='Foto da postagem' />
             </div>
+         
             <div className="rodapeDaPostagem">
+          
+
                 <div className="acoesDaPostagem">
-                    
+           
                     <Image
                         src={imgCurtir}
                         alt='Icone Curtir'
@@ -65,14 +75,13 @@ export default function Postagem({
                         width={20}
                         height={20}
                          className="icon"
-                        onClick={() => {
-                            console.log('comentar')
-                        }}
+                        onClick={() =>  setDeveExibirSecaoParaComentar(!deveExibirSecaoParaComentar)}
                     />
                   
                     <span className="quantidadeCurtidas">
                         Curtido por <strong>10 pessoas</strong>
                     </span>
+                 
                 </div>
                 <div className="descricaoDaPostagem">
                     <strong className="nomeUsuario">{usuario.nome}</strong>
@@ -93,8 +102,12 @@ export default function Postagem({
                     </div>
                 ))}
             </div>
+        
             </div>
-      
+            {
+                deveExibirSecaoParaComentar &&
+                 <FazerComentario usuarioLogado={usuarioLogado}/> 
+            }
         </div>
     );
 }

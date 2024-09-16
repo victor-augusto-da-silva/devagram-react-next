@@ -3,6 +3,17 @@ import Postagem from "./Postagem";
 
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
+    // Hook para adicionar e remover a classe ao body
+    useEffect(() => {
+        // Adiciona a classe "feed-page" ao body quando o componente é montado
+        document.body.classList.add('feed-page');
+        
+        // Remove a classe ao desmontar o componente (ao sair da página)
+        return () => {
+            document.body.classList.remove('feed-page');
+        };
+    }, []);
+
     
     useEffect(() => {
         console.log('Carregar o feed');
@@ -57,7 +68,10 @@ export function Feed({ usuarioLogado }) {
     return (
         <div className="feedContainer largura30pctDesktop"> 
             {listaDePostagens.map(dadosPostagem => (
-                <Postagem key={dadosPostagem.id} {...dadosPostagem} />
+                <Postagem key={dadosPostagem.id}
+                 {...dadosPostagem} 
+                 usuarioLogado= {usuarioLogado}
+                 />
             ))}
         </div>
     );
