@@ -14,8 +14,7 @@ export function Feed({ usuarioLogado }) {
         };
     }, []);
 
-    
-    useEffect(() => {
+     useEffect(() => {
         console.log('Carregar o feed');
         setListaDePostagens([
             {
