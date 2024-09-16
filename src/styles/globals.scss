@@ -88,14 +88,9 @@ input{
   font-family: $fontBold;
  }
 
- body{
-  @media screen and (min-width: $desktopBreakpoint){
-    background-color: $cinza5;
- 
-  }
- }
+  
 
-.largura30pctDesktop{
+ .largura30pctDesktop{
   @media screen and (min-width: $desktopBreakpoint) {
       width: 45%;
       margin: auto;

@@ -4,6 +4,7 @@
 
     .postagem{
         margin-top: 16px;
+        
         .cabecalhoPostagem{
             display: flex;
             align-items: center;
@@ -40,6 +41,12 @@
             font-size: 12px;
             margin: 0 0 2px;
             color: $cinza4;
+            .exibirDescricaoCompleta{
+                font-size: 12px;
+                color: $corPrimaria3;
+                cursor: pointer;
+                margin-left: 4px;
+            }
         }
         .comentario-nome{
             font-size: 12px;
@@ -72,3 +79,9 @@
     
  
 }
+body{
+    @media screen and (min-width: $desktopBreakpoint){
+      background-color: $cinza5;
+   
+    }
+   }
