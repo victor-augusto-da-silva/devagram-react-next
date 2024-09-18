@@ -98,6 +98,33 @@
 body.feed-page {
     @media screen and (min-width: $desktopBreakpoint){
       background-color: $cinza5;
-   
+    .postagem{
+        .rodapeDaPostagem{
+            
+            .acoesDaPostagem{
+                .icon{
+                cursor: pointer;
+                }
+                > span{
+                    cursor: pointer;
+                } 
+            }
+        }
+        .avatar{
+            width: 42px;
+            height: 42px;
+        }
+        .containerFazerComentario{
+            margin-top: 12px;
+            .btnPublicacao{
+                background-color: transparent;
+                color: $corPrimaria0;
+                outline: none;
+                border: none;
+                font-size: 12px;
+                cursor: pointer;
+            }
+        }
+    }
     }
    }

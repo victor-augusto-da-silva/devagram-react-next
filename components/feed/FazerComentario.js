@@ -10,6 +10,13 @@ export default function FazerComentario ({usuarioLogado}) {
 
         
         </textarea>
+        <button
+        type="button"
+        className="btnPublicacao desktop"
+
+        > 
+        Publicar
+        </button>
         </div>
     );
 }

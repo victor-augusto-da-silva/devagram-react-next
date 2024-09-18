@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import Postagem from "./Postagem";
+import FeedService from "../../services/FeedService";
+
+const feedService = new FeedService();
 
 export function Feed({ usuarioLogado }) {
     const [listaDePostagens, setListaDePostagens] = useState([]);
+
     // Hook para adicionar e remover a classe ao body
     useEffect(() => {
         // Adiciona a classe "feed-page" ao body quando o componente é montado
@@ -14,63 +18,48 @@ export function Feed({ usuarioLogado }) {
         };
     }, []);
 
-     useEffect(() => {
-        console.log('Carregar o feed');
-        setListaDePostagens([
-            {
-                id: '1',
-                usuario: {
-                    id: '1',
-                    nome: 'teste',
-                    avatar: null
-                },
-                fotoDoPost: 'https://www.freecodecamp.org/portuguese/news/content/images/2023/03/Ekran-Resmi-2019-11-18-18.08.13.png',
-                descricao: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-               
-                curtidas: [],
-                comentarios: [
-                    {
-                        nome: 'Teste',
-                        mensagem: 'oK'
+    // Carregar as postagens quando o usuário logado muda
+    useEffect(() => {
+        const carregarPostagens = async () => {
+            try {
+                const { data } = await feedService.carregarPostagens();
+
+                // Formata os dados da postagem
+                const postagensFormatadas = data.map((postagem) => ({
+                    id: postagem._id,
+                    usuario: {
+                        id: postagem.userId,
+                        nome: postagem.usuario.nome,
+                        avatar: postagem.usuario.avatar,
                     },
-                    {
-                        nome: 'Teste2',
-                        mensagem: 'Legal'
-                    }
-                    ,
-                    {
-                        nome: 'Teste3',
-                        mensagem: 'Legal ate de mais'
-                    }
-                ]
-            },
-            {
-                id: '2',
-                usuario: {
-                    id: '2',
-                    nome: 'abc',
-                    avatar: null
-                },
-                fotoDoPost: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg',
-                descricao: 'Lorem Ipsum is simply  ',
-                curtidas: [],
-                comentarios: [
-                    {
-                        nome: 'Teste',
-                        mensagem: 'oK'
-                    }
-                ]
-            },
-        ]);
+                    fotoDoPost: postagem.foto,
+                    descricao: postagem.descricao,
+                    curtidas: postagem.likes,
+                    comentarios: postagem.comentarios.map(c => ({
+                        nome: c.nome,
+                        mensagem: c.comentario
+                    }))
+                }));
+
+                // Atualiza a lista de postagens no estado
+                setListaDePostagens(postagensFormatadas);
+
+            } catch (error) {
+                console.error("Erro ao carregar postagens:", error);
+            }
+        };
+
+        carregarPostagens();
     }, [usuarioLogado]);
 
     return (
         <div className="feedContainer largura30pctDesktop"> 
             {listaDePostagens.map(dadosPostagem => (
-                <Postagem key={dadosPostagem.id}
-                 {...dadosPostagem} 
-                 usuarioLogado= {usuarioLogado}
-                 />
+                <Postagem
+                    key={dadosPostagem.id}
+                    {...dadosPostagem} 
+                    usuarioLogado={usuarioLogado}
+                />
             ))}
         </div>
     );

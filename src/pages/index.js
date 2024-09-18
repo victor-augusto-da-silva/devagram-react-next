@@ -16,12 +16,17 @@ export default function Main() {
 	const [imagem, setImagem] = useState(null);
 	const referenciaInput = useRef(null);
 	console.log(imagem);
-	const [estaAutenticado, setEstaAutenticado] = useState(false);
+	const [estaAutenticado, setEstaAutenticado] = useState(null);
 
 	/* [] é chamado apenas a primeira vez */
 	useEffect(() => {
 		setEstaAutenticado(usuarioService.estaAutenticado());
 	}, []);
+
+	if(estaAutenticado === null)
+	{
+		return null;
+	}
 
 	if (estaAutenticado) {
 		return <HomePage />; // Usando o componente Home importado
